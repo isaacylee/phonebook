@@ -20,7 +20,7 @@ app.use(express.json())
 app.use(requestLogger)
 
 morgan.token('body', function (req) {
-    return JSON.stringify(req.body)
+  return JSON.stringify(req.body)
 })
 
 app.use(morgan((tokens, req, res) => {
@@ -100,11 +100,11 @@ app.get('/info', (request, response) => {
 
     response.send(html)
   })
-  
+
 })
 
 const unknownEndpoint = (request, response) => {
-  response.status(404).send({error: 'unknown endpoint'})
+  response.status(404).send({ error: 'unknown endpoint' })
 }
 
 app.use(unknownEndpoint)
