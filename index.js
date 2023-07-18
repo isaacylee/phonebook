@@ -1,15 +1,23 @@
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
+const cors = require('cors')
 
 require('dotenv').config()
 const Person = require('./models/person')
 
-const cors = require('cors')
-app.use(cors())
+const requestLogger = (request, response, next) => {
+  console.log('Method:', request.method)
+  console.log('Path:  ', request.path)
+  console.log('Body:  ', request.body)
+  console.log('---')
+  next()
+}
 
+app.use(cors())
 app.use(express.static('build'))
 app.use(express.json())
+app.use(requestLogger)
 
 morgan.token('body', function (req) {
     return JSON.stringify(req.body)
